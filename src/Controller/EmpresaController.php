@@ -33,4 +33,20 @@ class EmpresaController extends AbstractController
 
         return $this->json($data);
     }
+
+    #[Route('/empresas/{id}', name: 'empresas_delete', methods:['delete'])]
+    public function delete(ManagerRegistry $doctrine, int $id): JsonResponse 
+    {
+        $entityManager = $doctrine->getManager();
+        $empresa = $entityManager->getRepository(Empresa::class)->find($id);
+
+        if (!$empresa){
+            return $this->json('Nenhuma empresa foi encontrada com o id ' . $id, 404);
+        }
+
+        $entityManager->remove($empresa);
+        $entityManager->flush();
+
+        return $this->json('A empresa de id '. $id . 'foi deletada com sucesso.');
+    }
 }
