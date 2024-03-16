@@ -13,6 +13,27 @@ use Symfony\Component\HttpFoundation\Request;
 #[Route('/api', name: 'api_')]
 class SocioController extends AbstractController
 {
+    #[Route('/socios', name: 'socios_index', methods:['get'])]
+    public function index(ManagerRegistry $doctrine): JsonResponse 
+    {
+        $socios = $doctrine
+            ->getRepository(Socio::class)
+            ->findAll();
+
+        $data = [];
+
+        foreach ($socios as $socio) {
+            $data[] = [
+                'id' => $socio->getId(),
+                'name' => $socio->getName(),
+                'email' => $socio->getEmail(),
+                'empresa_id' => $socio->getEmpresa(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
     #[Route('/socios', name: 'socios_create', methods:['POST'])]
     public function create(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
