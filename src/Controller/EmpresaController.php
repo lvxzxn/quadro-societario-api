@@ -47,6 +47,6 @@ class EmpresaController extends AbstractController
         $entityManager->remove($empresa);
         $entityManager->flush();
 
-        return $this->json('A empresa de id '. $id . 'foi deletada com sucesso.');
+        return $this->json('A empresa de id '. $id . ' foi deletada com sucesso.');
     }
 }
