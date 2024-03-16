@@ -12,7 +12,27 @@ use Symfony\Component\HttpFoundation\Request;
 
 #[Route('/api', name: 'api_')]
 class EmpresaController extends AbstractController
-{
+{   
+    #[Route('/empresas', name: 'empresas_index', methods:['get'])]
+    public function index(ManagerRegistry $doctrine): JsonResponse 
+    {
+        $empresas = $doctrine
+            ->getRepository(Empresa::class)
+            ->findAll();
+
+        $data = [];
+
+        foreach ($empresas as $empresa) {
+            $data[] = [
+                'id' => $empresa->getId(),
+                'name' => $empresa->getName(),
+                'email' => $empresa->getEmail(),
+            ];
+        }
+
+        return $this->json($data);
+    }
+
     #[Route('/empresas', name: 'empresa_create', methods:['post'])]
     public function create(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
