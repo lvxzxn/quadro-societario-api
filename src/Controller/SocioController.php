@@ -21,7 +21,7 @@ class SocioController extends AbstractController
         $socio = new Socio();
         $socio->setName($request->request->get('name'));
         $socio->setEmail($request->request->get('email'));
-        $socio->setEmpresaId($request->request->get('empresa_id'));
+        $socio->setEmpresa($request->request->get('empresa_id'));
 
         $entityManager->persist($socio);
         $entityManager->flush();
@@ -30,7 +30,7 @@ class SocioController extends AbstractController
             'id' => $socio->getId(),
             'name' => $socio->getName(),
             'email' => $socio->getEmail(),
-            'empresa_id' => $socio->getEmpresaId(),
+            'empresa_id' => $socio->getEmpresa(),
         ];
 
         return $this->json($data);

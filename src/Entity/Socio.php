@@ -13,30 +13,18 @@ class Socio
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $empresa_id = null;
-
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column]
+    private ?int $empresa_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEmpresaId(): ?int
-    {
-        return $this->empresa_id;
-    }
-
-    public function setEmpresaId(int $empresa_id): static
-    {
-        $this->empresa_id = $empresa_id;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -59,6 +47,18 @@ class Socio
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getEmpresa(): ?int
+    {
+        return $this->empresa_id;
+    }
+
+    public function setEmpresa(int $empresa): static
+    {
+        $this->empresa_id = $empresa;
 
         return $this;
     }
