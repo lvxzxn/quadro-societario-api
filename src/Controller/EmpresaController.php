@@ -33,6 +33,25 @@ class EmpresaController extends AbstractController
         return $this->json($data);
     }
 
+    #[Route('/empresas/{id}', name: 'empresa_show', methods:['get'])]
+    public function show(ManagerRegistry $doctrine, int $id): JsonResponse 
+    {
+        $entityManager = $doctrine->getManager();
+        $empresa = $entityManager->getRepository(Empresa::class)->find($id);
+
+        if (!$empresa){
+            return $this->json('Nenhuma empresa foi encontrada com o id ' . $id, 404);
+        }
+
+        $data = [
+            'id' => $empresa->getId(),
+            'name' => $empresa->getName(),
+            'email' => $empresa->getEmail(),
+        ];
+        
+        return $this->json($data);
+    }
+
     #[Route('/empresas', name: 'empresa_create', methods:['post'])]
     public function create(ManagerRegistry $doctrine, Request $request): JsonResponse
     {
