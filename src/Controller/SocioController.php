@@ -27,6 +27,7 @@ class SocioController extends AbstractController
                 'id' => $socio->getId(),
                 'name' => $socio->getName(),
                 'email' => $socio->getEmail(),
+                'cpf' => $socio->getCPF(),
                 'empresa_id' => $socio->getEmpresa(),
             ];
         }
@@ -42,6 +43,7 @@ class SocioController extends AbstractController
         $socio = new Socio();
         $socio->setName($request->request->get('name'));
         $socio->setEmail($request->request->get('email'));
+        $socio->setCPF($request->request->get('cpf'));
         $socio->setEmpresa($request->request->get('empresa_id'));
 
         $entityManager->persist($socio);
@@ -51,6 +53,7 @@ class SocioController extends AbstractController
             'id' => $socio->getId(),
             'name' => $socio->getName(),
             'email' => $socio->getEmail(),
+            'cpf' => $socio->getCPF(),
             'empresa_id' => $socio->getEmpresa(),
         ];
 

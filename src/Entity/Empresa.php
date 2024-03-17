@@ -19,6 +19,9 @@ class Empresa
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $cnpj;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Empresa
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getCNPJ(): ?string
+    {
+        return $this->cnpj;
+    }
+
+    public function setCNPJ(string $cnpj): static
+    {
+        $this->cnpj = $cnpj;
 
         return $this;
     }

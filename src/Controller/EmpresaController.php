@@ -27,6 +27,7 @@ class EmpresaController extends AbstractController
                 'id' => $empresa->getId(),
                 'name' => $empresa->getName(),
                 'email' => $empresa->getEmail(),
+                'cnpj' => $empresa->getCNPJ(),
             ];
         }
 
@@ -47,6 +48,7 @@ class EmpresaController extends AbstractController
             'id' => $empresa->getId(),
             'name' => $empresa->getName(),
             'email' => $empresa->getEmail(),
+            'cnpj' => $empresa->getCNPJ(),
         ];
         
         return $this->json($data);
@@ -60,6 +62,7 @@ class EmpresaController extends AbstractController
         $empresa = new Empresa();
         $empresa->setName($request->request->get('name'));
         $empresa->setEmail($request->request->get('email'));
+        $empresa->setCNPJ($request->request->get('cnpj'));
 
         $entityManager->persist($empresa);
         $entityManager->flush();
@@ -68,6 +71,7 @@ class EmpresaController extends AbstractController
             'id' => $empresa->getId(),
             'name' => $empresa->getName(),
             'email' => $empresa->getEmail(),
+            'cnpj' => $empresa->getCNPJ(),
         ];
 
         return $this->json($data);

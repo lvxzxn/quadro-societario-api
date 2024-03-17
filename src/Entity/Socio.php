@@ -19,6 +19,9 @@ class Socio
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $cpf = null;
+
     #[ORM\Column]
     private ?int $empresa_id = null;
 
@@ -47,6 +50,18 @@ class Socio
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getCPF(): ?string
+    {
+        return $this->cpf;
+    }
+
+    public function setCPF(string $cpf): static
+    {
+        $this->cpf = $cpf;
 
         return $this;
     }
